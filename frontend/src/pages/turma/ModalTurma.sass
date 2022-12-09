@@ -1,0 +1,40 @@
+@use "../../styles/root"
+
+.modal_professor
+    width: 100vw
+    height: 100vh
+    position: fixed
+    background-color: rgba(105,105,105, 0.7)
+
+    transform: translate(-50%, -50%)
+    top: 50%
+    left: 50%
+
+    color: root.$color_blueSecondary
+    z-index: 100
+
+    .container_rows_professor
+        width: 350px
+        height: 500px
+        position: absolute
+        transform: translate(-50%, -50%)
+        top: 50%
+        left: 50%
+
+        background-color:  #fff
+        overflow-y: scroll
+
+        .row_professor
+            width: 80%
+            height: 35px
+            margin: 10px auto
+            border-bottom: 2px solid root.$color_blue5
+            cursor: pointer
+
+
+.visibilty
+    display: block
+
+.hidden
+    display: none
+

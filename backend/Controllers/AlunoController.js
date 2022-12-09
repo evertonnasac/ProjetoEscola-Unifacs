@@ -6,7 +6,8 @@ export class AlunoController {
 
         const conn = await connect()
        
-        const nome = req.body.nome
+        console.log(req.body)
+        const nome = req.body.name
         const cpf = req.body.cpf
         const modulo = req.body.modulo
 
@@ -36,7 +37,7 @@ export class AlunoController {
         const conn = await connect()
 
         try{
-            const result = await conn.query("select * from tb_aluno")
+            const result = await conn.query("select * from tb_aluno order by nome_aluno")
             res.status(200).json(result.rows)
         }
         catch(err){
@@ -75,7 +76,7 @@ export class AlunoController {
         const conn = await connect()
         
         try{
-            const result = await conn.query("Select * from tb_aluno WHERE nome_aluno = $1", [name])
+            const result = await conn.query("Select * from tb_aluno WHERE nome_aluno = $1 order by nome_aluno", [name])
             res.status(200).json(result.rows)
         }
         catch(err){
@@ -91,6 +92,8 @@ export class AlunoController {
         
         const matAluno = req.body.matricula
         const idTurma = req.body.turma
+
+        console.log(matAluno, idTurma)
 
         const conn = await connect()
 
@@ -108,6 +111,52 @@ export class AlunoController {
             conn.release()
         } 
     }
+
+    static selectAlunoByModulo = async (req, res) => {
+
+        const modulo = await req.params.modulo
+
+        const conn = await connect()
+        
+        try{
+            const result = await conn.query("Select * from tb_aluno WHERE modulo_atual = $1 order by nome_aluno" , [modulo])
+            res.status(200).json(result.rows)
+        }
+        catch(err){
+            res.status(404).json({message : "Não foi possível realizar a operaçao"})
+        }
+        finally{
+            conn.release()
+        } 
+    }
+
+    static selectTurmasByAlunoModulo = async (req, res) => {
+        const modulo = req.query.modulo
+        const matricula = req.query.matricula    
+        const conn = await connect()
+
+        try{
+            const sql = 
+           "select tb_aluno_turma.id_aluno_turma, tb_aluno.nome_aluno, tb_turma.desc_turma,"+
+           "tb_professor.nome_professor, tb_disciplina.nome_disciplina from tb_aluno, tb_aluno_turma,"+
+           "tb_professor, tb_disciplina, tb_turma where tb_aluno_turma.matricula_aluno = tb_aluno.matricula_aluno "+
+           "AND tb_turma.id_professor = tb_professor.id_professor and "+
+           "tb_disciplina.id_disciplina = tb_professor.id_disciplina "+
+           "and tb_aluno_turma.id_turma = tb_turma.id_turma "+
+           "and tb_aluno.matricula_aluno = $1 and tb_aluno.modulo_atual = $2"
+        
+            const result = await conn.query(sql, [matricula, modulo])
+            res.status(200).send(result.rows)
+        }
+        catch(err){
+            res.status(404).json({message: "Não foi possível realizar a operação"})
+        }
+        finally{
+            conn.release()
+        }
+    } 
+    
+
 
     static updateModuloAluno = async (req, res) => {
         const matAluno = req.body.matricula

@@ -1,0 +1,64 @@
+@use "../../styles/root"
+
+.page_professor
+    width: 100%
+    height: 100%
+
+    .form_professor
+        width: 90%
+        display: flex
+        flex-wrap: wrap
+        gap: 5%
+        row-gap: 10px
+        margin: 25px
+
+        .content_input.name
+            width: 69%
+
+        .content_input 
+            width: 30%
+            height: 85px
+
+            input
+                background-color: buttonface
+
+            .pointer
+                cursor: pointer
+
+            .inputOut
+                height: 50%
+                width: 100%
+                border: none
+                margin: 0
+
+    .content_button_prof
+        width: 200px
+        height: 50px
+
+    .container_list_professor
+        width: 90%
+        margin: 0 auto
+
+        .column_list_professor
+            display: flex
+            justify-content: space-evenly
+            width: 100%
+
+        .row_list_professor
+            width: 100%
+            height: 60px
+
+            display: flex
+            justify-content: space-evenly
+            border-bottom: 2px solid root.$color_blue5
+            margin-bottom: 2%
+            line-height: 85px
+
+            .name_professor
+                width: 50%
+            
+            .titulo_professor, .nome_disciplina
+                width: 15%
+                
+
+            

@@ -1,0 +1,21 @@
+@use "../styles/root"
+
+.nav
+    width: 90%
+    height: 30px
+    display: flex
+    gap: 5%
+    margin: 0 auto
+    border-bottom: 1px solid root.$color_blue5
+
+    .itemNav
+        height: 100%
+        color: root.$color_blueSecondary
+        cursor: pointer
+
+    .itemSelected
+        color: root.$color_bluePrimary
+        font-weight: bold
+        border-bottom:  2px solid root.$color_bluePrimary
+        
+

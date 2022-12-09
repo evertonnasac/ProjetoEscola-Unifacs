@@ -25,5 +25,22 @@ export class DisciplinaController {
     }
 
 
+    static selectAllDisciplina = async (req, res) => {
+
+        const conn = await connect()
+
+        try{
+            const result = await conn.query("select * from tb_disciplina order by nome_disciplina")
+            res.status(200).json(result.rows)
+        }
+        catch(err){
+            res.status(404).json({message: "Não foi possível realizar a operação"})
+        }
+        finally{
+            conn.release()
+        } 
+    }
+
+
 
 }

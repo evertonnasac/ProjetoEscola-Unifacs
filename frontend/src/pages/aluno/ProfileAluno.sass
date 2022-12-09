@@ -1,0 +1,81 @@
+@use "../../styles/root"
+
+.main_profile_aluno
+
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 100px
+
+    .header_profile_aluno
+        width: 100%
+        height: 300px
+
+        display: flex
+        justify-content: space-between
+
+        .img_profile
+            width: 35%
+            height: 100%
+
+        .container_info_aluno
+            width: 60%
+            
+            .nome_aluno
+                color: root.$color_bluePrimary
+                font-size: 36px
+                font-weight: 600
+            
+            
+            .modulo, .cpf, .matricula 
+                color: root.$color_blueSecondary
+                font-size: 18px
+                font-weight: 500
+            
+            .container_btn_add_turma
+                width: 80%
+                height: 50px
+
+
+
+    .container_turmas
+        width: 90%
+        display: flex
+        flex-wrap: wrap
+        gap: 20px
+        row-gap: 20px
+        justify-content: center
+
+        .card_turma
+
+            p
+                margin: 2px 0
+
+            width: 300px
+            height: 85px
+            background-color: root.$color_blue5
+
+            .desc_turma
+                background-color: root.$color_blueSecondary
+                color: #fff
+                margin-top: 0
+                width: 100%
+                line-height: 30px
+                height: 30px
+            
+            .card_turma_body
+                padding: 0 10px
+
+                .professor
+                    color: root.$color_bluePrimary
+                
+                .disciplina
+                    color: root.$color_blueSecondary
+                
+
+
+
+
+

@@ -27,6 +27,24 @@ export class TurmaController {
         }
     }
 
+    static selectAllTurmas = async (req, res) => {
+
+        const conn = await connect()
+
+        try{
+            const result = await conn.query("select tb_turma.desc_turma, tb_turma.sala_turma,"+
+            " tb_professor.nome_professor from tb_turma, tb_professor where tb_professor.id_professor= "+
+            "tb_turma.id_professor")
+            res.status(200).json(result.rows)
+        }
+        catch(err){
+            res.status(404).json({message: "Não foi possível realizar a operação"})
+        }
+        finally{
+            conn.release()
+        } 
+    }
+
     static selectTurmasByModulo = async (req, res) => {
         const modulo = req.params.modulo        
         const conn = await connect()
@@ -50,5 +68,9 @@ export class TurmaController {
             conn.release()
         }
     } 
+
+
+    
+
 
 }

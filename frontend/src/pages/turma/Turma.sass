@@ -1,0 +1,60 @@
+@use "../../styles/root"
+
+.page_turma
+    width: 100%
+    height: 100%
+
+    .form_turma
+        width: 90%
+        display: flex
+        flex-wrap: wrap
+        gap: 5%
+        row-gap: 10px
+        margin: 25px
+
+        .content_input_turma.name
+            width: 69%
+
+        .content_input_turma 
+            width: 30%
+            height: 85px
+
+            input
+                background-color: buttonface
+
+            .pointer
+                cursor: pointer
+
+            .inputOut
+                height: 50%
+                width: 100%
+                border: none
+                margin: 0
+
+    .content_button_turma
+        width: 200px
+        height: 50px
+
+    .container_list_turma
+        width: 90%
+        margin: 0 auto
+
+
+        .row_list_turma
+            width: 100%
+            height: 60px
+
+            display: flex
+            justify-content: space-evenly
+            border-bottom: 2px solid root.$color_blue5
+            margin-bottom: 2%
+            line-height: 85px
+
+            .name_professor
+                width: 50%
+            
+            .sala_turma, .desc_turma
+                width: 15%
+                
+
+            
