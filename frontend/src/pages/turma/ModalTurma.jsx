@@ -7,7 +7,7 @@ import "./ModalTurma.sass"
 
 export const ModalTurma = ({visiblity, setVisibilty, setProfessor}) =>{
 
-    const [professor, setProfessor] = useState([])
+    const [listProfessor, setListProfessor] = useState([])
 
     const selectProfessor = (id, nome) => {
         setProfessor(id, nome)
@@ -16,7 +16,7 @@ export const ModalTurma = ({visiblity, setVisibilty, setProfessor}) =>{
 
     if(visiblity){
         api.get("/professor")
-        .then(result => setProfessor(result.data))
+        .then(result => setListProfessor(result.data))
         .catch(err => console.log(err))
     }
    
@@ -25,7 +25,7 @@ export const ModalTurma = ({visiblity, setVisibilty, setProfessor}) =>{
         <div className={"modal_professor " + (visiblity == true ? "visibility" : "hidden") }>
             <div className="container_rows_professor">
          
-                {professor.map((item)=> {
+                {listProfessor.map((item)=> {
                     return <div onClick={() => selectProfessor(Number(item.id_professor), item.nome_professor)} 
                                 className="row_professor">{item.nome_professor}</div>
                            

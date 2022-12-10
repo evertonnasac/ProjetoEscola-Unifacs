@@ -5,6 +5,7 @@ import { NavHorizontal } from "../../components/NavHorizontal.jsx"
 import {Search} from "../../components/Search"
 import {Button} from "../../components/Button"
 import {ModalNovoAluno} from "./ModalNovoAluno"
+import { ModalBoletim } from "./ModalBoletim.jsx"
 
 import "./Aluno.sass"
 
@@ -38,7 +39,8 @@ export const Aluno = () => {
     const [alunos, setAlunos] = useState([])
     const [itemNavSelected, setItemNavSelected] = useState(itemsNav)
     const [selecAll, setSelectAll] = useState(true)
-    const [modal, setModal] = useState(false)
+    const [modalNovoAluno, setModalNovoAluno] = useState(false)
+    const [ModalBoletim, setModalBoletim] = useState(false)
 
 
     const setItemSelectedNav = async ({value, number}) => {
@@ -72,9 +74,11 @@ export const Aluno = () => {
 
     return(
         <section className="page_alunos">
-            <ModalNovoAluno visibility={modal} setVisibility = {setModal}/>
+
+            <ModalNovoAluno visibility={modalNovoAluno} setVisibility = {setModalNovoAluno}/>
+
             <div className="container_btn">
-                <Button type="primary" onclick = {() => setModal(!modal)}>Novo Aluno</Button>
+                <Button type="primary" onclick = {() => setModalNovoAluno(!modalNovoAluno)}>Novo Aluno</Button>
             </div>
 
             <div className="container_search">

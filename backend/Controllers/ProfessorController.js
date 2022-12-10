@@ -41,7 +41,7 @@ export class ProfessorController {
 
         try{
 
-            const result = await conn.query("SELECT tb_professor.nome_professor,"+
+            const result = await conn.query("SELECT tb_professor.id_professor, tb_professor.nome_professor,"+
             " tb_professor.titulo_professor, tb_professor.cpf_professor,"+
             "tb_disciplina.nome_disciplina  FROM tb_professor, tb_disciplina "+
             "WHERE tb_professor.id_disciplina = tb_disciplina.id_disciplina order by nome_professor")

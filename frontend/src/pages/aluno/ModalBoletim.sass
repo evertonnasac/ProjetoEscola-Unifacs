@@ -16,7 +16,7 @@
     .title
         font-size: 18px
 
-    .form
+    .containet_main
         width: 400px
         height: 400px
         position: absolute
@@ -32,12 +32,22 @@
         align-items: center
 
         .content_input_nota
-            width: 75%
-            height: 20%
+            width: 50%
+            height: 60px
+
+            input
+                width: 100%
+                height: 50%
+                border: none
+                background-color: root.$color_blue5
 
         .content_button_boletim
-            width: 45%
-            height: 50px
+            width: 30%
+            height: 35px
+           
+
+    .content_button_boletim.Aprovado,  .content_button_boletim.Reprovado
+        visibility: hidden
 
 
 .visibilty
@@ -46,9 +56,9 @@
 .hidden
     display: none
 
-.aprovado
+.Aprovado
     color: root.$color_bluePrimary
 
-.reprovado
+.Reprovado
     color: red
 

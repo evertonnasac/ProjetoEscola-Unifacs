@@ -158,20 +158,18 @@ export class AlunoController {
     
 
 
-    static updateModuloAluno = async (req, res) => {
-        const matAluno = req.body.matricula
-        const modulo = req.body.modulo
+    static updateModuloAluno = async (matricula, modulo) => {
 
         const conn = await connect()
 
+
         try{
             const query = "UPDATE tb_aluno SET modulo_atual = $1 WHERE matricula_aluno = $2)"
-            const values = [matAluno, modulo]
+            const values = [matricula, modulo]
             const result = await conn.query(query, values)
-            res.staus(200).json(result.rows)
         }
         catch(err){
-            res.status(404).json({message : "Não foi possível realizar a operaçao"})
+
         }
         finally{
             conn.release()
@@ -192,10 +190,23 @@ export class AlunoController {
             const values = [nota, modulo, matricula, aprovado]
             const result = await conn.query(query, values)
            
+            if(modulo < 6){
+                
+                try{
+                    const query = "UPDATE tb_aluno SET modulo_atual = $1 WHERE matricula_aluno = $2)"
+                    const values = [matricula, modulo]
+                    await conn.query(query, values)
+                }
+                catch(err){
+
+                }
+
+            }
+
             res.status(200).json(result.rows)
         }
         catch(err){
-            res.status(404).status(200)
+            res.status(404).send(err)
         }
         finally{
             conn.release()

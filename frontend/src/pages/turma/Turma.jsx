@@ -34,7 +34,7 @@ export const Turma = () => {
     const saveTurma = async () => {
         await api.post("/turma", {...turma}).catch(err => console.log(err))
         getListTurma()
-        listTurma({descricao:"", sala: "", professor: 0})
+        setListTurma({descricao:"", sala: "", professor: 0})
         setProfessor("")
     }
 

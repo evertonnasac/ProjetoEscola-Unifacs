@@ -4,6 +4,7 @@ import iconProfile from "../../images/icon-profile.png"
 import api from "../../api/api"
 import {Button} from "../../components/Button"
 import { ModalTurmaAluno } from "./ModalTurmaAluno"
+import { ModalBoletim } from "./ModalBoletim.jsx"
 
 
 import "./ProfileAluno.sass"
@@ -13,6 +14,7 @@ export const ProfileAluno = () => {
     const [aluno, setAluno] = useState([])
     const [turmas, setTurmas] = useState([])
     const [modal, setModal] = useState(false)
+    const [modalBoletim, setModalBoletim] = useState(false)
 
     const {search} = useLocation()
 
@@ -43,12 +45,16 @@ export const ProfileAluno = () => {
 
     return (
         <main className="main_profile_aluno">
+
             <ModalTurmaAluno 
                 matricula={aluno.length > 0 ? aluno[0].matricula_aluno : 0}
                 modulo = {aluno.length > 0 ? aluno[0].modulo_atual : 0}
                 visiblity = {modal}
                 setVisibilty = {setModal}
             />
+
+            <ModalBoletim visibility={modalBoletim} setVisibility = {setModalBoletim} />
+
             <div className="header_profile_aluno">
                 <img src= {iconProfile} alt="Foto de perfil" className="img_profile" />
                 {aluno.map((aluno) => {
@@ -57,9 +63,17 @@ export const ProfileAluno = () => {
                                 <p className="cpf">CPF: {aluno.cpf_aluno || "" }</p>
                                 <p className="matricula">N° mat.: {aluno.matricula_aluno || ""}</p>
                                 <p className="modulo">Modulo {aluno.modulo_atual || ""}</p>
-                                <div className="container_btn_add_turma">
-                                    <Button type="primary" onclick = {() => setModal(!modal)}>Matricular em turmas</Button>
+                                <div className="container_btn_modal">
+                                    <div className="content_btn_modal">
+                                        <Button type="primary" 
+                                            onclick = {() => setModal(!modal)}>Matricular em turmas</Button>
+                                    </div>
+                                    <div className="content_btn_modal">
+                                        <Button type="secondary" 
+                                            onclick = {() => setModalBoletim(!modalBoletim)}>Gerar Boletim</Button>
+                                    </div>
                                 </div>
+                                
                             </div>
                 })}
                 
