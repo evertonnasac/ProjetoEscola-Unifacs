@@ -53,29 +53,33 @@ export const ProfileAluno = () => {
                 setVisibilty = {setModal}
             />
 
-            <ModalBoletim visibility={modalBoletim} setVisibility = {setModalBoletim} />
+            <ModalBoletim 
+                visibility={modalBoletim} 
+                setVisibility = {setModalBoletim} 
+                matricula={aluno.length > 0 ? aluno[0].matricula_aluno : 0}
+                modulo = {aluno.length > 0 ? aluno[0].modulo_atual : 0}
+            />
 
             <div className="header_profile_aluno">
                 <img src= {iconProfile} alt="Foto de perfil" className="img_profile" />
                 {aluno.map((aluno) => {
-                    return   <div className="container_info_aluno">
-                                <p className="nome_aluno">{aluno.nome_aluno || ""}</p>
-                                <p className="cpf">CPF: {aluno.cpf_aluno || "" }</p>
-                                <p className="matricula">N° mat.: {aluno.matricula_aluno || ""}</p>
-                                <p className="modulo">Modulo {aluno.modulo_atual || ""}</p>
-                                <div className="container_btn_modal">
-                                    <div className="content_btn_modal">
-                                        <Button type="primary" 
-                                            onclick = {() => setModal(!modal)}>Matricular em turmas</Button>
-                                    </div>
-                                    <div className="content_btn_modal">
-                                        <Button type="secondary" 
-                                            onclick = {() => setModalBoletim(!modalBoletim)}>Gerar Boletim</Button>
-                                    </div>
+                return   <div className="container_info_aluno">
+                            <p className="nome_aluno">{aluno.nome_aluno || ""}</p>
+                            <p className="cpf">CPF: {aluno.cpf_aluno || "" }</p>
+                            <p className="matricula">N° mat.: {aluno.matricula_aluno || ""}</p>
+                            <p className="modulo">Modulo {aluno.modulo_atual || ""}</p>
+                            <div className="container_btn_modal">
+                                <div className="content_btn_modal">
+                                    <Button type="primary" 
+                                        onclick = {() => setModal(!modal)}>Matricular em turmas</Button>
                                 </div>
-                                
+                                <div className="content_btn_modal">
+                                    <Button type="secondary" 
+                                        onclick = {() => setModalBoletim(!modalBoletim)}>Gerar Boletim</Button>
+                                </div>
                             </div>
-                })}
+                         </div>
+            })}
                 
             </div>
                 <div className="container_turmas">

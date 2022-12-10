@@ -8,8 +8,8 @@ export const ModalTurmaAluno = ({visiblity, setVisibilty, matricula, modulo}) =>
     
     const [disciplinas, setDisciplinas] = useState([])
 
+
     useEffect(() => {
-        console.log(modulo)
         api.get("turma/modulos/" + modulo)
         .then(result => setDisciplinas(result.data))
         .catch(err => console.log(err))

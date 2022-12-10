@@ -8,18 +8,17 @@ export const ModalBoletim = ({visibility, setVisibility, matricula, modulo}) => 
 
     const[nota, setNota] = useState()
     const [situacao, setSituacao] = useState("")
-
+  
     const handleNota = (e) => {
         setNota(e.target.value)
     }
-    const setBoletim = () => {
+    const setBoletim = async() => {
         nota < 6 ? setSituacao("Reprovado") : setSituacao("Aprovado")
 
         api.post("aluno/boletim", {matricula: matricula, modulo: modulo, nota: nota})
-        .then(result => console.log(result))
-        .catch(err => console.log(err))
-        
-    }
+            .then((result) => console.log(result))
+            .catch(err => console.log(err))
+        }
 
     return (
         <section className={"modal_nota "+ (visibility == true ? "visibility"  : "hidden")}>
@@ -38,7 +37,10 @@ export const ModalBoletim = ({visibility, setVisibility, matricula, modulo}) => 
                     <Button type="primary" onclick={setBoletim}>Salvar</Button>
                 </div>
                 <div className="content_button_boletim " >
-                    <Button type="error" onclick={() => setVisibility(!visibility)}>Sair</Button>
+                    <Button type="error" onclick={() => {
+                        setSituacao("")
+                        setNota(0)
+                        setVisibility(!visibility)}}>Sair</Button>
                 </div>
                 
                 <div className= {"message " + situacao}>{situacao}</div>

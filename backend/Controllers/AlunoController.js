@@ -6,7 +6,6 @@ export class AlunoController {
 
         const conn = await connect()
        
-        console.log(req.body)
         const nome = req.body.name
         const cpf = req.body.cpf
         const modulo = req.body.modulo
@@ -54,7 +53,6 @@ export class AlunoController {
 
         const conn = await connect()
 
-        console.log(matricula)
         
         try{
             const result = await conn.query("Select * from tb_aluno WHERE matricula_aluno = $1", [matricula])
@@ -162,10 +160,9 @@ export class AlunoController {
 
         const conn = await connect()
 
-
         try{
             const query = "UPDATE tb_aluno SET modulo_atual = $1 WHERE matricula_aluno = $2)"
-            const values = [matricula, modulo]
+            const values = [modulo, matricula]
             const result = await conn.query(query, values)
         }
         catch(err){
@@ -190,18 +187,6 @@ export class AlunoController {
             const values = [nota, modulo, matricula, aprovado]
             const result = await conn.query(query, values)
            
-            if(modulo < 6){
-                
-                try{
-                    const query = "UPDATE tb_aluno SET modulo_atual = $1 WHERE matricula_aluno = $2)"
-                    const values = [matricula, modulo]
-                    await conn.query(query, values)
-                }
-                catch(err){
-
-                }
-
-            }
 
             res.status(200).json(result.rows)
         }
