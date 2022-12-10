@@ -176,7 +176,7 @@ export class AlunoController {
     static insertBoletinAluno = async (req, res) => {
         const nota = req.body.nota
         const matricula = req.body.matricula
-        const modulo = req.body.modulo
+        let modulo = req.body.modulo
         
         let aprovado = nota >= 6 && true
 
@@ -187,6 +187,21 @@ export class AlunoController {
             const values = [nota, modulo, matricula, aprovado]
             const result = await conn.query(query, values)
            
+            if(nota > 6 && modulo < 3){
+                modulo += 1
+                console.log(modulo)
+
+                try{
+                    const query1 = "UPDATE tb_aluno SET modulo_atual = $1 WHERE matricula_aluno = $2"
+                    const values1 = [modulo, matricula]
+                    await conn.query(query1, values1)
+                    
+                }
+                catch(err){
+                    console.log(err)
+                }
+
+            }
 
             res.status(200).json(result.rows)
         }
